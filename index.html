@@ -1,0 +1,74 @@
+<html>
+	<head>
+	</head>
+	<style type="text/css">
+		body {
+			background-color: slategray;
+		}
+	</style>
+	<body>
+		<h1>Hello world</h1>
+		<object id="corgi-art" data="./CorgiArt.svg" type="image/svg+xml" />
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
+		<script type="text/javascript">
+			const svg = document.getElementById('corgi-art');
+
+			svg.addEventListener('load', animate);
+			
+			function animate () {
+
+				// Must run in localhost, doesn't load contentDocument if running HMTL locally
+				const corgi = svg.contentDocument;
+
+				// code pops out toaster
+				toasterTimeline = new TimelineMax();
+
+				toasterTimeline
+				.to(corgi.getElementById("codea"), .7, {y: "-=13", ease: Elastic.easeOut}, "0")
+				.to(corgi.getElementById("codeaa"), .7, {y: "-=13", ease: Elastic.easeOut}, "-=.7")
+				.to(corgi.getElementById("switch"), .7, {y: "-=18", ease: Elastic.easeOut}, "-=.7")
+				.pause()
+				
+				corgi.addEventListener('click', () => popToaster(corgi, toasterTimeline));
+
+				//have corgi use mac while idle
+				const mainTimeline = new TimelineMax({repeat: -1, repeatDelay: 1});
+
+				mainTimeline
+				.to(corgi.getElementById("rightpaw"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "+=5")
+				.to(corgi.getElementById("mouse"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "-=.4")
+				.to(corgi.getElementById("mousesh"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "-=.4")
+				.to(corgi.getElementById("rightpaw"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "+=4")
+				.to(corgi.getElementById("mouse"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "-=.4")
+				.to(corgi.getElementById("mousesh"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "-=.4")
+				.to(corgi.getElementById("rightpaw"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "+=4")
+				.to(corgi.getElementById("mouse"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "-=.6")
+				.to(corgi.getElementById("mousesh"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "-=.6")
+				.to(corgi.getElementById("rightpaw"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "+=0.5")
+				.to(corgi.getElementById("mouse"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "-=.5")
+				.to(corgi.getElementById("mousesh"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "-=.5")
+				.to(corgi.getElementById("rightpaw"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "+=5")
+				.to(corgi.getElementById("mouse"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "-=.7")
+				.to(corgi.getElementById("mousesh"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "-=.7")
+
+				.to(corgi.getElementById("leftpaw"), .4, {rotation: 5, x: "-=1", y: "-=5", ease: Linear.noEase}, "-=11")
+				.to(corgi.getElementById("leftpaw"), .2, {rotation: -7, x: "-=1", y: "+=4", ease: Linear.noEase}, "-=10.6")
+				.to(corgi.getElementById("leftpaw"), .1, {rotation: 2, y: "-=2", ease: Linear.noEase}, "-=10.5")
+				.to(corgi.getElementById("leftpaw"), .15, {rotation: -2, y: "+=2", ease: Linear.noEase}, "-=10.35")
+				.to(corgi.getElementById("leftpaw"), .1, {rotation: 4, x: "+=1", y: "-=2", ease: Linear.noEase}, "-=10.25")
+				.to(corgi.getElementById("leftpaw"), .4, {rotation: 0, x: "+=1", y: "+=3", ease: Linear.noEase}, "-=9.95")				
+			}
+
+			function popToaster (corgi, toasterTimeline) {
+
+				if (toasterTimeline.progress() === 0) {
+					toasterTimeline.play();
+				}
+
+				if (toasterTimeline.progress() === 1) {
+					toasterTimeline.reverse();
+				}
+			}
+		</script>
+	</body>
+</html>
