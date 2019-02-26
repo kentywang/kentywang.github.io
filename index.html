@@ -13,9 +13,11 @@
 		<script type="text/javascript">
 			/*	TODOS
 				- make unscrollable
+				- use vector math to make mouse movement better (rounder)
 				- mobile 
 					- layout optimize
 					- remove darken on focus
+					- use device motion for mouse movement
 			*/
 
 			// onComplete will flip this flag, so start at true.
@@ -48,18 +50,26 @@
 				.to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
 				.pause()
 
-				// Smooth animation for mouse movement
+				// Smooth animation for mouse movement.
 				rightpaw.style.transition = 'transform .1s ease-in-out';
 				mouse.style.transition = 'transform .1s ease-in-out';
 
 				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
-
-				corgi.addEventListener('mousemove', ({movementX: x, movementY: y}) => moveMouse(rightpaw, mouse, x, y));
+				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY));
+				window.addEventListener('devicemotion', ({rotationRate: {beta,alpha}}) => moveMouse(rightpaw, mouse, beta / 5, alpha / 5), true);
 			}
 
 			function moveMouse (rightpaw, mouse, x, y) {
-				const moveX = Math.max(-3, Math.min(3, x));
-				const moveY = Math.max(-3, Math.min(3, y));
+				// Rotate input to map to isometric desk.
+				const radians = Math.PI / 180 * 45;
+				const cos = Math.cos(radians);
+				const sin = Math.sin(radians);
+				const rotX = cos * x + sin * y;
+				const rotY = cos * y - sin * x;
+
+				// Limit magnitude of vector.
+				const moveX = Math.max(-3, Math.min(3, rotX));
+				const moveY = Math.max(-3, Math.min(3, rotY));
 
 				rightpaw.style.transform = `translate(${moveX}px, ${moveY}px)`;
 				mouse.style.transform = `translate(${moveX}px, ${moveY}px)`;
