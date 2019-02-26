@@ -16,7 +16,6 @@
 				- mobile 
 					- layout optimize
 					- remove darken on focus
-
 			*/
 
 			// onComplete will flip this flag, so start at true.
@@ -31,8 +30,8 @@
 				// Must run in localhost, doesn't load contentDocument if running HMTL locally.
 				const corgi = svg.contentDocument;
 
-				const rightpaw = corgi.getElementById("rightpaw");
 				const leftpaw = corgi.getElementById("leftpaw");
+				const rightpaw = corgi.getElementById("rightpaw");
 				const mouse = corgi.getElementById("mouse");
 
 				// Corgi hits keyboard, and code pops out toaster.
@@ -42,12 +41,6 @@
 					onComplete: () => toasterhasPopped = !toasterhasPopped,
 				});
 
-				// Have corgi use computer while idle.
-				const mouseTl = new TimelineMax({
-					repeat: -1,
-					repeatDelay: 1
-				});
-
 				keyboardTl
 				.to(leftpaw, .2, {rotation: 5, x: "-=1", y: "-=5"})
 				.to(leftpaw, .1, {rotation: -7, x: "-=1", y: "+=4"})
@@ -55,19 +48,21 @@
 				.to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
 				.pause()
 
-				mouseTl
-				.to(rightpaw, .4, {x: "-=3", y: "+=2"}, "+=5")
-				.to(mouse, .4, {x: "-=3", y: "+=2"}, "-=.4")
-				.to(rightpaw, .4, {x: "+=7", y: "-=5"}, "+=4")
-				.to(mouse, .4, {x: "+=7", y: "-=5"}, "-=.4")
-				.to(rightpaw, .6, {x: "-=3", y: "+=1"}, "+=4")
-				.to(mouse, .6, {x: "-=3", y: "+=1"}, "-=.6")
-				.to(rightpaw, .5, {x: "-=2", y: "+=3"}, "+=0.5")
-				.to(mouse, .5, {x: "-=2", y: "+=3"}, "-=.5")
-				.to(rightpaw, .7, {x: "+=1", y: "-=1"}, "+=5")
-				.to(mouse, .7, {x: "+=1", y: "-=1"}, "-=.7")
+				// Smooth animation for mouse movement
+				rightpaw.style.transition = 'transform .1s ease-in-out';
+				mouse.style.transition = 'transform .1s ease-in-out';
 
 				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
+
+				corgi.addEventListener('mousemove', ({movementX: x, movementY: y}) => moveMouse(rightpaw, mouse, x, y));
+			}
+
+			function moveMouse (rightpaw, mouse, x, y) {
+				const moveX = Math.max(-3, Math.min(3, x));
+				const moveY = Math.max(-3, Math.min(3, y));
+
+				rightpaw.style.transform = `translate(${moveX}px, ${moveY}px)`;
+				mouse.style.transform = `translate(${moveX}px, ${moveY}px)`;
 			}
 
 			function popToaster (corgi, keyboardTl, toasterTl) {
