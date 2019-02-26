@@ -56,7 +56,7 @@
 
 				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
 				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY));
-				window.addEventListener('devicemotion', ({rotationRate: {beta, alpha}}) => moveMouse(rightpaw, mouse, beta / 5, alpha / 5), true);
+				window.addEventListener('devicemotion', ({rotationRate: {beta, alpha}}) => moveMouse(rightpaw, mouse, beta / 10, alpha / 10), true);
 			}
 
 			function moveMouse (rightpaw, mouse, x, y) {
@@ -69,7 +69,7 @@
 						[x, y] = [-y, x];
 						break;
 					case 180:
-						[x, y] = [-y, -x];
+						[x, y] = [-x, -y];
 				}
 
 				// Rotate input to map to isometric desk.
