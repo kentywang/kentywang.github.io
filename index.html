@@ -11,62 +11,85 @@
 		<object id="corgi-art" data="./CorgiArt.svg" type="image/svg+xml" />
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
 		<script type="text/javascript">
+			/*	TODOS
+				- make unscrollable
+				- mobile 
+					- layout optimize
+					- remove darken on focus
+
+			*/
+
+			// onComplete will flip this flag, so start at true.
+			let toasterhasPopped = true;
+
 			const svg = document.getElementById('corgi-art');
 
 			svg.addEventListener('load', animate);
 			
 			function animate () {
 
-				// Must run in localhost, doesn't load contentDocument if running HMTL locally
+				// Must run in localhost, doesn't load contentDocument if running HMTL locally.
 				const corgi = svg.contentDocument;
 
-				// code pops out toaster
-				toasterTimeline = new TimelineMax();
+				const rightpaw = corgi.getElementById("rightpaw");
+				const leftpaw = corgi.getElementById("leftpaw");
+				const mouse = corgi.getElementById("mouse");
 
-				toasterTimeline
-				.to(corgi.getElementById("codea"), .7, {y: "-=13", ease: Elastic.easeOut}, "0")
-				.to(corgi.getElementById("codeaa"), .7, {y: "-=13", ease: Elastic.easeOut}, "-=.7")
-				.to(corgi.getElementById("switch"), .7, {y: "-=18", ease: Elastic.easeOut}, "-=.7")
+				// Corgi hits keyboard, and code pops out toaster.
+				const keyboardTl = new TimelineMax();
+				const toasterTl = new TimelineMax({
+					autoRemoveChildren: true,
+					onComplete: () => toasterhasPopped = !toasterhasPopped,
+				});
+
+				// Have corgi use computer while idle.
+				const mouseTl = new TimelineMax({
+					repeat: -1,
+					repeatDelay: 1
+				});
+
+				keyboardTl
+				.to(leftpaw, .2, {rotation: 5, x: "-=1", y: "-=5"})
+				.to(leftpaw, .1, {rotation: -7, x: "-=1", y: "+=4"})
+				.to(leftpaw, .1, {rotation: 4, x: "+=1", y: "-=2"})
+				.to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
 				.pause()
-				
-				corgi.addEventListener('click', () => popToaster(corgi, toasterTimeline));
 
-				//have corgi use mac while idle
-				const mainTimeline = new TimelineMax({repeat: -1, repeatDelay: 1});
+				mouseTl
+				.to(rightpaw, .4, {x: "-=3", y: "+=2"}, "+=5")
+				.to(mouse, .4, {x: "-=3", y: "+=2"}, "-=.4")
+				.to(rightpaw, .4, {x: "+=7", y: "-=5"}, "+=4")
+				.to(mouse, .4, {x: "+=7", y: "-=5"}, "-=.4")
+				.to(rightpaw, .6, {x: "-=3", y: "+=1"}, "+=4")
+				.to(mouse, .6, {x: "-=3", y: "+=1"}, "-=.6")
+				.to(rightpaw, .5, {x: "-=2", y: "+=3"}, "+=0.5")
+				.to(mouse, .5, {x: "-=2", y: "+=3"}, "-=.5")
+				.to(rightpaw, .7, {x: "+=1", y: "-=1"}, "+=5")
+				.to(mouse, .7, {x: "+=1", y: "-=1"}, "-=.7")
 
-				mainTimeline
-				.to(corgi.getElementById("rightpaw"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "+=5")
-				.to(corgi.getElementById("mouse"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "-=.4")
-				.to(corgi.getElementById("mousesh"), .4, {x: "-=3", y: "+=2", ease: Linear.noEase}, "-=.4")
-				.to(corgi.getElementById("rightpaw"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "+=4")
-				.to(corgi.getElementById("mouse"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "-=.4")
-				.to(corgi.getElementById("mousesh"), .4, {x: "+=7", y: "-=5", ease: Linear.noEase}, "-=.4")
-				.to(corgi.getElementById("rightpaw"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "+=4")
-				.to(corgi.getElementById("mouse"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "-=.6")
-				.to(corgi.getElementById("mousesh"), .6, {x: "-=3", y: "+=1", ease: Linear.noEase}, "-=.6")
-				.to(corgi.getElementById("rightpaw"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "+=0.5")
-				.to(corgi.getElementById("mouse"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "-=.5")
-				.to(corgi.getElementById("mousesh"), .5, {x: "-=2", y: "+=3", ease: Linear.noEase}, "-=.5")
-				.to(corgi.getElementById("rightpaw"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "+=5")
-				.to(corgi.getElementById("mouse"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "-=.7")
-				.to(corgi.getElementById("mousesh"), .7, {x: "+=1", y: "-=1", ease: Linear.noEase}, "-=.7")
-
-				.to(corgi.getElementById("leftpaw"), .4, {rotation: 5, x: "-=1", y: "-=5", ease: Linear.noEase}, "-=11")
-				.to(corgi.getElementById("leftpaw"), .2, {rotation: -7, x: "-=1", y: "+=4", ease: Linear.noEase}, "-=10.6")
-				.to(corgi.getElementById("leftpaw"), .1, {rotation: 2, y: "-=2", ease: Linear.noEase}, "-=10.5")
-				.to(corgi.getElementById("leftpaw"), .15, {rotation: -2, y: "+=2", ease: Linear.noEase}, "-=10.35")
-				.to(corgi.getElementById("leftpaw"), .1, {rotation: 4, x: "+=1", y: "-=2", ease: Linear.noEase}, "-=10.25")
-				.to(corgi.getElementById("leftpaw"), .4, {rotation: 0, x: "+=1", y: "+=3", ease: Linear.noEase}, "-=9.95")				
+				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
 			}
 
-			function popToaster (corgi, toasterTimeline) {
+			function popToaster (corgi, keyboardTl, toasterTl) {
+				const codea = corgi.getElementById("codea");
+				const codeb = corgi.getElementById("codeb");
+				const toasterSwitch = corgi.getElementById("switch");
 
-				if (toasterTimeline.progress() === 0) {
-					toasterTimeline.play();
-				}
+				if (!keyboardTl.isActive() && !toasterTl.isActive()) {
 
-				if (toasterTimeline.progress() === 1) {
-					toasterTimeline.reverse();
+					keyboardTl.restart();
+
+					if (!toasterhasPopped) {
+						toasterTl
+						.to(codea, .8, {y: "-=16", ease: Elastic.easeOut}, "+=.4")
+						.to(codeb, .8, {y: "-=16", ease: Elastic.easeOut}, "-=.8")
+						.to(toasterSwitch, .4, {y: "-=18", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
+					} else {
+						toasterTl
+						.to(codea, .6, {y: "+=16"}, "+=.4")
+						.to(codeb, .6, {y: "+=16"}, "-=.6")
+						.to(toasterSwitch, .6, {y: "+=18"}, "-=.6")
+					}
 				}
 			}
 		</script>
