@@ -7,7 +7,6 @@
 		}
 	</style>
 	<body>
-		<h1>Hello world</h1>
 		<object id="corgi-art" data="./CorgiArt.svg" type="image/svg+xml" />
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
 		<script type="text/javascript">
@@ -86,9 +85,13 @@
 					mouse.style.transition = 'transform .1s ease-in-out';
 				}
 
-				// Limit magnitude of vector.
-				x = Math.max(-3, Math.min(3, x));
-				y = Math.max(-3, Math.min(3, y));
+				// Limit magnitude of movement.
+				const angle = Math.atan(y / x) || 0;
+				const limitX = Math.abs(Math.cos(angle)) * 3;
+				const limitY = Math.abs(Math.sin(angle)) * 3;
+
+				x = Math.max(-limitX, Math.min(limitX, x));
+				y = Math.max(-limitY, Math.min(limitY, y));
 
 				rightpaw.style.transform = `translate(${x}px, ${y}px)`;
 				mouse.style.transform = `translate(${x}px, ${y}px)`;
