@@ -22,6 +22,7 @@
 					- share
 					- favicon
 					- SEO
+				- delete older repos
 			*/
 
 			// onComplete will flip this flag, so start at true.
@@ -54,41 +55,43 @@
 				.to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
 				.pause()
 
-				// Smooth animation for mouse movement.
-				rightpaw.style.transition = 'transform .1s ease-in-out';
-				mouse.style.transition = 'transform .1s ease-in-out';
-
 				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
-				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY));
-				window.addEventListener('devicemotion', ({rotationRate: {beta, alpha}}) => moveMouse(rightpaw, mouse, beta / 10, alpha / 10), true);
+				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY, true));
+				window.addEventListener('deviceorientation', ({beta, gamma}) => moveMouse(rightpaw, mouse, ...rotationToTranslation(beta, gamma)));
 			}
 
-			function moveMouse (rightpaw, mouse, x, y) {
+			function rotationToTranslation (beta, gamma) {
+				beta = beta / 180 * 20;
+				gamma = gamma / 90 * 20;
 
 				switch (window.orientation) {
+					case 0:
+						return [gamma, beta]
 					case 90:
-						[x, y] = [y, -x];
-						break;
-					case -90:
-						[x, y] = [-y, x];
-						break;
+						return [beta, -gamma];
 					case 180:
-						[x, y] = [-x, -y];
+						return [-gamma, -beta];
+					case -90:
+						return [-beta, gamma];
 				}
 
-				// Rotate input to map to isometric desk.
-				const radians = Math.PI / 180 * 45;
-				const cos = Math.cos(radians);
-				const sin = Math.sin(radians);
-				const rotX = cos * x + sin * y;
-				const rotY = cos * y - sin * x;
+				return [0, 0];
+			}
+
+			function moveMouse (rightpaw, mouse, x, y, fromMouseMovement) {
+
+				// Smooth animation for mouse movement.
+				if (fromMouseMovement) {
+					rightpaw.style.transition = 'transform .1s ease-in-out';
+					mouse.style.transition = 'transform .1s ease-in-out';
+				}
 
 				// Limit magnitude of vector.
-				const moveX = Math.max(-3, Math.min(3, rotX));
-				const moveY = Math.max(-3, Math.min(3, rotY));
+				x = Math.max(-3, Math.min(3, x));
+				y = Math.max(-3, Math.min(3, y));
 
-				rightpaw.style.transform = `translate(${moveX}px, ${moveY}px)`;
-				mouse.style.transform = `translate(${moveX}px, ${moveY}px)`;
+				rightpaw.style.transform = `translate(${x}px, ${y}px)`;
+				mouse.style.transform = `translate(${x}px, ${y}px)`;
 			}
 
 			function popToaster (corgi, keyboardTl, toasterTl) {
