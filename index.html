@@ -55,7 +55,7 @@
 				.pause()
 
 				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
-				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY, true));
+				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY));
 				window.addEventListener('deviceorientation', ({beta, gamma}) => moveMouse(rightpaw, mouse, ...rotationToTranslation(beta, gamma)));
 			}
 
@@ -77,10 +77,9 @@
 				return [0, 0];
 			}
 
-			function moveMouse (rightpaw, mouse, x, y, fromMouseMovement) {
-
+			function moveMouse (rightpaw, mouse, x, y) {
 				// Smooth animation for mouse movement.
-				if (fromMouseMovement) {
+				if (window.orientation == null) {
 					rightpaw.style.transition = 'transform .1s ease-in-out';
 					mouse.style.transition = 'transform .1s ease-in-out';
 				}
