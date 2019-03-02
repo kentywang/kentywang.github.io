@@ -8,11 +8,10 @@
 	</head>
 	<body>
 		<object id="corgi-art" data="./CorgiArt.svg" type="image/svg+xml" />
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js" defer></script>
+		<script type="text/javascript" defer>
 			/*	TODOS
 				- make unscrollable
-				- use vector math to make mouse movement better (rounder)
 				- mobile 
 					- layout optimize
 					- remove darken on focus
@@ -22,6 +21,8 @@
 					- favicon
 					- SEO
 				- delete older repos
+				- faster loading (https://addyosmani.com/blog/script-priorities/)
+				- make like V1 but lazy load and design for modularity
 			*/
 
 			// onComplete will flip this flag, so start at true.
