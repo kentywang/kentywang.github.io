@@ -1,4 +1,0 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'Giant Chipmunk'
-theme = 'hugo-theme-itheme'
