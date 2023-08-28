@@ -1,7 +1,7 @@
 ---
 title: "My First Chip"
 date: 2023-08-27T20:48:27-04:00
-draft: true
+draft: false
 description: "some description of the article"
 author: "author of this article"
 cover: "https://example.com/cover.jpg"
