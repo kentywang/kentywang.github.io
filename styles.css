@@ -1,0 +1,55 @@
+
+body, html {
+    color: #fff;
+    font-size: 1em;
+    background-color: #21262f;
+}
+
+a, a:visited, a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#about {
+    font-size: .8em;
+    position: fixed;
+    margin: 15px 15px;
+    bottom: 0;
+    right: 3em;
+    color: #778899;
+}
+
+#love {
+    display: none;
+    opacity: 0;
+    font-size: 3em;
+}
+
+.fa-heart {
+    position: fixed;
+    margin: 15px 15px;
+    bottom: 0;
+    right: 0;
+    color: #778899;
+}
+
+.links {
+    font-size: 3em;
+}
+
+.fa-github {
+    position: fixed;
+    margin: 15px 15px;
+    color: #778899;
+    bottom: 0;
+    left: 0;
+}
+
+.fa-github:hover {
+    color: #fff;
+}
+

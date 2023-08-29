@@ -1,0 +1,52 @@
+Index: index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>!-- Your Site Name Here --!</title>\n  <link href=\"styles.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\">\n  <link rel=\"icon\" type=\"image/png\" href=\"https://neothemes.neocities.org/images/favicon.gif\" />\n</head>\n<body class=\"scroll\">\n<div id=\"container\">\n  <div id=\"header\">\n    <h1 class=\"title\">Quirky Corgi’s<br>(or graphic)</h1>\n  </div>\n  <div id=\"wrapper\">\n    <div class=\"two-boxes\">\n      <div class=\"box-one scroll\">\n        <div class=\"section-title\">\n          Heading\n        </div>\n        <div class=\"content\">\n          <p><strong>Layout Features</strong></p>\n          <ul>\n            <li>Fully responsive layout on any size device.</li>\n            <li>Fixed width divs that add a scrollbar as opposed to stretching.</li>\n            <li>Navigation section moves to top when window is resized.</li>\n          </ul>\n        </div>\n      </div>\n      <div class=\"box-two scroll\">\n        <div class=\"section-title\">Navigation</div>\n        <div class=\"nav-wrapper\">\n          <button><a href=\"/\">Home</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n          <button><a href=\"#\">Link</a></button>\n        </div>\n      </div>\n    </div>\n    <div class=\"two-boxes\">\n      <div class=\"box-three scroll\">\n        <div class=\"section-title\">Heading</div>\n        <div class=\"content\">\n          <p>The great thing about this is that you can write as much as you like, and it just adds a scrollbar. Just keep writing until you can write no more!</p>\n        </div>\n      </div>\n      <div class=\"box-four scroll\">\n        <div class=\"section-title\">Heading</a></div>\n        <div class=\"content\">\n          <p>The great thing about this is that you can write as much as you like, and it just adds a scrollbar. Just keep writing until you can write no more!</p>\n        </div>\n      </div>\n    </div>\n    <div id=\"footer\">\n      <p>© Layout by <a href=\"https://neothemes.neocities.org/\" target=\"_blank\">NeoThemes</a></p>\n    </div>\n  </div>\n</body>\n</html>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/index.html b/index.html
+--- a/index.html	(revision a6420f8fb386b90981411072a1cd761496a47c8f)
++++ b/index.html	(date 1693229060717)
+@@ -10,7 +10,7 @@
+ <body class="scroll">
+ <div id="container">
+   <div id="header">
+-    <h1 class="title">Quirky Corgi’s<br>(or graphic)</h1>
++    <h1 class="title">Quirky Corgi’s Home Page</h1>
+   </div>
+   <div id="wrapper">
+     <div class="two-boxes">
+@@ -20,16 +20,19 @@
+         </div>
+         <div class="content">
+           <p><strong>Layout Features</strong></p>
+-          <ul>
+-            <li>Fully responsive layout on any size device.</li>
+-            <li>Fixed width divs that add a scrollbar as opposed to stretching.</li>
+-            <li>Navigation section moves to top when window is resized.</li>
+-          </ul>
+         </div>
+       </div>
+       <div class="box-two scroll">
+         <div class="section-title">Navigation</div>
+         <div class="nav-wrapper">
++          <button><a href="/">Home</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
++          <button><a href="#">Link</a></button>
+           <button><a href="/">Home</a></button>
+           <button><a href="#">Link</a></button>
+           <button><a href="#">Link</a></button>
+@@ -52,6 +55,7 @@
+         <div class="section-title">Heading</a></div>
+         <div class="content">
+           <p>The great thing about this is that you can write as much as you like, and it just adds a scrollbar. Just keep writing until you can write no more!</p>
++          <img src="Diagram.png" width="100%"/>
+         </div>
+       </div>
+     </div>

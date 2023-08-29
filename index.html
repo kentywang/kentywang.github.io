@@ -1,124 +1,23 @@
-<html>
-	<head>
-		<style type="text/css">
-			body {
-				background-color: slategray;
-			}
-		</style>
-	</head>
-	<body>
-		<object id="corgi-art" data="./CorgiArt.svg" type="image/svg+xml" />
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js" defer></script>
-		<script type="text/javascript" defer>
-			/*	TODOS
-				- make unscrollable
-				- mobile 
-					- layout optimize
-					- remove darken on focus
-					- use device motion for mouse movement
-				- meta data
-					- share
-					- favicon
-					- SEO
-				- delete older repos
-				- faster loading (https://addyosmani.com/blog/script-priorities/)
-				- make like V1 but lazy load and design for modularity
-			*/
-
-			// onComplete will flip this flag, so start at true.
-			let toasterhasPopped = true;
-
-			const svg = document.getElementById('corgi-art');
-
-			svg.addEventListener('load', animate);
-			
-			function animate () {
-
-				// Must run in localhost, doesn't load contentDocument if running HMTL locally.
-				const corgi = svg.contentDocument;
-
-				const leftpaw = corgi.getElementById("leftpaw");
-				const rightpaw = corgi.getElementById("rightpaw");
-				const mouse = corgi.getElementById("mouse");
-
-				// Corgi hits keyboard, and code pops out toaster.
-				const keyboardTl = new TimelineMax();
-				const toasterTl = new TimelineMax({
-					autoRemoveChildren: true,
-					onComplete: () => toasterhasPopped = !toasterhasPopped,
-				});
-
-				keyboardTl
-				.to(leftpaw, .2, {rotation: 5, x: "-=1", y: "-=5"})
-				.to(leftpaw, .1, {rotation: -7, x: "-=1", y: "+=4"})
-				.to(leftpaw, .1, {rotation: 4, x: "+=1", y: "-=2"})
-				.to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
-				.pause()
-
-				corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
-				corgi.addEventListener('mousemove', ({movementX, movementY}) => moveMouse(rightpaw, mouse, movementX, movementY));
-				window.addEventListener('deviceorientation', ({beta, gamma}) => moveMouse(rightpaw, mouse, ...rotationToTranslation(beta, gamma)));
-			}
-
-			function rotationToTranslation (beta, gamma) {
-				beta = beta / 180 * 20;
-				gamma = gamma / 90 * 20;
-
-				switch (window.orientation) {
-					case 0:
-						return [gamma, beta]
-					case 90:
-						return [beta, -gamma];
-					case 180:
-						return [-gamma, -beta];
-					case -90:
-						return [-beta, gamma];
-				}
-
-				return [0, 0];
-			}
-
-			function moveMouse (rightpaw, mouse, x, y) {
-				// Smooth animation for mouse movement.
-				if (window.orientation == null) {
-					rightpaw.style.transition = 'transform .1s ease-in-out';
-					mouse.style.transition = 'transform .1s ease-in-out';
-				}
-
-				// Limit magnitude of movement.
-				const angle = Math.atan(y / x) || 0;
-				const limitX = Math.abs(Math.cos(angle)) * 3;
-				const limitY = Math.abs(Math.sin(angle)) * 3;
-
-				x = Math.max(-limitX, Math.min(limitX, x));
-				y = Math.max(-limitY, Math.min(limitY, y));
-
-				rightpaw.style.transform = `translate(${x}px, ${y}px)`;
-				mouse.style.transform = `translate(${x}px, ${y}px)`;
-			}
-
-			function popToaster (corgi, keyboardTl, toasterTl) {
-				const codea = corgi.getElementById("codea");
-				const codeb = corgi.getElementById("codeb");
-				const toasterSwitch = corgi.getElementById("switch");
-
-				if (!keyboardTl.isActive() && !toasterTl.isActive()) {
-
-					keyboardTl.restart();
-
-					if (!toasterhasPopped) {
-						toasterTl
-						.to(codea, .8, {y: "-=16", ease: Elastic.easeOut}, "+=.4")
-						.to(codeb, .8, {y: "-=16", ease: Elastic.easeOut}, "-=.8")
-						.to(toasterSwitch, .4, {y: "-=18", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
-					} else {
-						toasterTl
-						.to(codea, .6, {y: "+=16"}, "+=.4")
-						.to(codeb, .6, {y: "+=16"}, "-=.6")
-						.to(toasterSwitch, .6, {y: "+=18"}, "-=.6")
-					}
-				}
-			}
-		</script>
-	</body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Kenty Wang</title>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenMax.min.js" defer></script>
+<script type="text/babel" src="main.jsx" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/337ee3c2a3.js"></script>
+</body>
 </html>
