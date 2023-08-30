@@ -1,3 +1,26 @@
+const works = [
+    {id: "afia", name: "Afia", url: "https://github.com/kentywang/Afia"},
+    {id: "aga", name: "Agamari", url: "http://vmnckpwxor.us17.qoddiapp.com"},
+    {id: "dorta", name: "Dorta", url: "https://github.com/kentywang/Dorta"},
+    {id: "flywheel", name: "Flywheel", url: "https://github.com/kentywang/Flywheel"},
+    {id: "origami", name: "Origami", url: "https://github.com/kentywang/Origami"},
+    {id: "scheme", name: "SCHEME--", url: "https://github.com/kentywang/scheme--"},
+    {id: "wishlights", name: "Wishlights", url: "https://github.com/kentywang/Wishlights"},
+];
+
+const showAndTell = {
+    afia: "1st place entry for 2017 #DecentralizeTheWeb challenge",
+    aga: "planetary multiplayer game built with Three.js, Cannon.js, & Socket.IO",
+    dorta: "hackathon fighting game built with HTML5 canvas & Socket.IO",
+    love: "SVG art designed in Adobe Illustrator, animated with GSAP",
+    flywheel: "scrub through browser tabs like songs on an iPod",
+    origami: "two-fingered window resizing like pinch to zoom",
+    scheme: "lisp interpreter with garbage collection built with C",
+    wishlights: "virtual lantern festival built with A-Frame"
+};
+
+const fullscreenApps = ["afia", "aga", "dorta", "love"];
+
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -26,38 +49,11 @@ class Main extends React.Component {
         // TweenMax.from(works, .7, {y: "-=50", opacity: 0, ease: Power1.easeOut, delay: 1.2});
     }
 
-    showDiagram = (pic) => {
-
-        switch (pic) {
-            case "love":
-                this.setState({
-                    show: "love",
-                    showAbout: <div style={{fontWeight: "600", color: "white"}}>SVG art designed in Adobe Illustrator,
-                        animated with GSAP</div>
-                });
-                break;
-            case "dorta":
-                this.setState({
-                    show: "dorta",
-                    showAbout: <div style={{fontWeight: "600", color: "white"}}>hackathon fighting game built with HTML5
-                        canvas & Socket.IO</div>
-                });
-                break;
-            case "aga":
-                this.setState({
-                    show: "aga",
-                    showAbout: <div style={{fontWeight: "600", color: "white"}}>planetary multiplayer game built with
-                        React, Redux, Three.js, Cannon.js, & Socket.IO</div>
-                });
-                break;
-            case "afia":
-                this.setState({
-                    show: "afia",
-                    showAbout: <div style={{fontWeight: "600", color: "white"}}>UX prototype for a decentralized,
-                        personal health record app. 1st place entry for 2017 #DecentralizeTheWeb challenge</div>
-                });
-                break;
-        }
+    showDiagram = (id) => {
+        this.setState({
+            show: id,
+            showAbout: <div style={{fontWeight: "600", color: "white"}}>{showAndTell[id]}</div>
+        });
     }
 
     hideDiagram = () => {
@@ -165,39 +161,31 @@ class Main extends React.Component {
     render() {
         const {show, showAbout} = this.state;
 
-        const works = [
-            {id: "afia", name: "Afia", url: "https://github.com/kentywang/Afia"},
-            {id: "aga", name: "Agamari", url: "http://vmnckpwxor.us17.qoddiapp.com"},
-            {id: "dorta", name: "Dorta", url: "https://github.com/kentywang/Dorta"},
-            {id: "flywheel", name: "Flywheel", url: "https://github.com/kentywang/Flywheel"},
-            {id: "origami", name: "Origami", url: "https://github.com/kentywang/Origami"},
-            {id: "scheme", name: "SCHEME--", url: "https://github.com/kentywang/scheme--"},
-            {id: "wishlights", name: "Wishlights", url: "https://github.com/kentywang/Wishlights"},
-        ]
-
         return (
             <div className="container">
                 {this.images(show)}
 
                 <div ref="name" id="name" className="container-sm">
-                    <object style={{maxHeight: "20vh"}} className={show ? "invisible" : "visible"} ref="svg"
+                    <object style={{maxHeight: "20vh"}}
+                            className={fullscreenApps.includes(show) ? "invisible" : "visible"} ref="svg"
                             data="siggy.svg" type="image/svg+xml" width={"100%"}/>
                 </div>
 
                 <div className="row">
                     <div id="corgi" className="col-md-6">
-                        <object className={show ? "invisible" : "visible"} ref="svg"
+                        <object className={fullscreenApps.includes(show) ? "invisible" : "visible"} ref="svg"
                                 data="corgi-art.svg" type="image/svg+xml" width={"100%"}/>
                     </div>
                     <div ref="works" id="works" className="col-md-6 text-center">
                         {show !== "love" &&
                             works.map(({id, name, url}) => (
                                 <div key={id}
-                                     onMouseOver={() => this.showDiagram(id)}
-                                     onMouseLeave={this.hideDiagram}
                                      className={(showAbout && show !== id) ? "invisible" : "visible"}
                                 >
-                                    <a href={url} target="_blank">
+                                    <a
+                                        onMouseOver={() => this.showDiagram(id)}
+                                        onMouseLeave={this.hideDiagram}
+                                        href={url} target="_blank">
                                         {name}
                                     </a>
                                 </div>
