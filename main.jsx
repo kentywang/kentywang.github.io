@@ -7,7 +7,7 @@ const works = [
         isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "1st place entry for 2017 #DecentralizeTheWeb challenge",
+        desc: "2017 #DecentralizeTheWeb challenge’s 1st place entry",
     },
     {
         id: "aga",
@@ -66,7 +66,7 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
-        desc: "(cons (+ lisp c) garbage-collector)",
+        desc: "(cons (+ lisp c) garbage-collector)",  // TODO: Mention WASM when implemented
     },
     {
         id: "wishlights",
@@ -99,6 +99,14 @@ class Main extends React.Component {
             showAbout: false,
             toasterHasPopped: true,
         }
+        this.videoRef = React.createRef();
+    }
+
+    setPlayBack = () => {
+        if (this.state.show === "afia")
+            this.videoRef.current.playbackRate = 2.0;
+        else
+            this.videoRef.current.playbackRate = 1.0;
     }
 
     componentDidMount() {
@@ -620,7 +628,9 @@ class Main extends React.Component {
                 return (
                     <video className={fullscreenApps.includes(show) ? "fullscreen" : "hide"}
                            src={work.file}
+                           ref={this.videoRef}
                            playsInline autoPlay muted loop
+                           onCanPlay={() => this.setPlayBack()}
                            type="video/mp4"
                     />
                 );
@@ -633,7 +643,6 @@ class Main extends React.Component {
         }
     };
 }
-
 
 ReactDOM.createRoot(document.getElementById('app')).render(<Main/>);
 
