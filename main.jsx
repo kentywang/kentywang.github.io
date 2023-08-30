@@ -87,15 +87,15 @@ class Main extends React.Component {
             .to(leftpaw, .2, {rotation: -2, x: "+=1", y: "+=3"})
             .pause()
 
-        corgi.addEventListener('click', () => popToaster(corgi, keyboardTl, toasterTl));
+        corgi.addEventListener('click', () => this.popToaster(corgi, keyboardTl, toasterTl));
         corgi.addEventListener('mousemove', ({
                                                  movementX,
                                                  movementY
-                                             }) => moveMouse(rightpaw, mouse, movementX, movementY));
+                                             }) => this.moveMouse(rightpaw, mouse, movementX, movementY));
         window.addEventListener('deviceorientation', ({
                                                           beta,
                                                           gamma
-                                                      }) => moveMouse(rightpaw, mouse, ...rotationToTranslation(beta, gamma)));
+                                                      }) => this.moveMouse(rightpaw, mouse, ...rotationToTranslation(beta, gamma)));
     }
 
     rotationToTranslation = (beta, gamma) => {
@@ -146,14 +146,14 @@ class Main extends React.Component {
 
             if (!toasterhasPopped) {
                 toasterTl
-                    .to(codea, .8, {y: "-=16", ease: Elastic.easeOut}, "+=.4")
-                    .to(codeb, .8, {y: "-=16", ease: Elastic.easeOut}, "-=.8")
-                    .to(toasterSwitch, .4, {y: "-=18", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
+                    .to(codea, .8, {y: "-=22", ease: Elastic.easeOut}, "+=.4")
+                    .to(codeb, .8, {y: "-=22", ease: Elastic.easeOut}, "-=.8")
+                    .to(toasterSwitch, .4, {y: "-=24", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
             } else {
                 toasterTl
-                    .to(codea, .6, {y: "+=16"}, "+=.4")
-                    .to(codeb, .6, {y: "+=16"}, "-=.6")
-                    .to(toasterSwitch, .6, {y: "+=18"}, "-=.6")
+                    .to(codea, .6, {y: "+=22"}, "+=.4")
+                    .to(codeb, .6, {y: "+=22"}, "-=.6")
+                    .to(toasterSwitch, .6, {y: "+=24"}, "-=.6")
             }
         }
     }
