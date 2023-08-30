@@ -86,6 +86,12 @@ a:not(:hover) {
 }
 
 /* Corgi SVG */
+.monitorimg {
+    height: 23px;
+    width: 21px;
+    transform: translate(291px, 318px) skew(4deg, -29deg);
+}
+
 .cls-1 {
     fill: #696870;
 }

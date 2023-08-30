@@ -8,14 +8,70 @@
 // }
 
 const works = [
-    {id: "afia", name: "Afia", url: "https://github.com/kentywang/Afia", file: "afia.mp4", isVideo: true, isFullscreen: true },
-    {id: "aga", name: "Agamari", url: "http://vmnckpwxor.us17.qoddiapp.com", file: "agamari.mp4", isVideo: true, isFullscreen: true },
-    {id: "dorta", name: "Dorta", url: "https://github.com/kentywang/Dorta", file: "dorta.gif", isVideo: false, isFullscreen: true },
-    {id: "flywheel", name: "Flywheel", url: "https://github.com/kentywang/Flywheel", file: "fly.gif", isVideo: false, isFullscreen: false },
-    {id: "origami", name: "Origami", url: "https://github.com/kentywang/Origami", file: "origami.gif", isVideo: false, isFullscreen: false },
-    {id: "qz", name: "Quartz shop", url: "https://quirkycorgi.codeberg.page/qz-store/", file: "qz.jpg", isVideo: false, isFullscreen: false },
-    {id: "scheme", name: "SCHEME--", url: "https://github.com/kentywang/scheme--", file: "qz.jpg", isVideo: false, isFullscreen: false },
-    {id: "wishlights", name: "Wishlights", url: "https://github.com/kentywang/Wishlights", file: "lanterns.gif", isVideo: false, isFullscreen: true },
+    {
+        id: "afia",
+        name: "Afia",
+        url: "https://github.com/kentywang/Afia",
+        file: "afia.mp4",
+        isVideo: true,
+        isFullscreen: true
+    },
+    {
+        id: "aga",
+        name: "Agamari",
+        url: "http://vmnckpwxor.us17.qoddiapp.com",
+        file: "agamari.mp4",
+        isVideo: true,
+        isFullscreen: true
+    },
+    {
+        id: "dorta",
+        name: "Dorta",
+        url: "https://github.com/kentywang/Dorta",
+        file: "dorta.gif",
+        isVideo: false,
+        isFullscreen: true
+    },
+    {
+        id: "flywheel",
+        name: "Flywheel",
+        url: "https://github.com/kentywang/Flywheel",
+        file: "fly.gif",
+        isVideo: false,
+        isFullscreen: false
+    },
+    {
+        id: "origami",
+        name: "Origami",
+        url: "https://github.com/kentywang/Origami",
+        file: "origami.gif",
+        isVideo: false,
+        isFullscreen: false
+    },
+    {
+        id: "qz",
+        name: "Quartz shop",
+        url: "https://quirkycorgi.codeberg.page/qz-store/",
+        file: "qz.jpg",
+        isVideo: false,
+        isFullscreen: false
+    },
+    {
+        id: "scheme",
+        name: "SCHEME--",
+        url: "https://github.com/kentywang/scheme--",
+        file: "qz.jpg",
+        isVideo: false,
+        isFullscreen: false
+    },
+    {
+        id: "wishlights",
+        name: "Wishlights",
+        url: "https://github.com/kentywang/Wishlights",
+        file: "lanterns.gif",
+        isVideo: false,
+        isFullscreen: true
+    },
 ];
 
 const showAndTell = {
@@ -203,9 +259,10 @@ class Main extends React.Component {
                                     <polygon className="cls-9"
                                              points="211.8 399.92 208.95 439.71 201.87 443.64 205.32 396.12 211.8 399.92"/>
                                 </g>
-                                <polygon className="cls-3" ref="macsh"
-                                         points="259.08 348.71 290.84 367.05 316.25 352.93 284.48 334.22 259.08 348.71"/>
+
                                 <g ref="mac">
+                                    <polygon className="cls-3" ref="macsh"
+                                             points="259.08 348.71 290.84 367.05 316.25 352.93 284.48 334.22 259.08 348.71"/>
                                     <path className="cls-13"
                                           d="M315.2,334.43v.17a.71.71,0,0,1-.28.55l-10.45,6c-.15.09-.29,0-.29-.22v-.16a.69.69,0,0,1,.29-.55l10.45-6C315.07,334.13,315.2,334.23,315.2,334.43Z"/>
                                     <polygon className="cls-14"
@@ -221,11 +278,13 @@ class Main extends React.Component {
                                           transform="matrix(0.84, -0.54, 0.04, 1, 296.82, 330.09)">woof.
                                     </text>
 
-                                    {show && !fullscreenApps.includes(show) && (
-                                        <image
-                                            href={works.find(w => w.id === show).file}
-                                            style={{transform: "translate(293px, 320px) scale(0.04, 0.08) skew(3deg, -17deg)"}}/>
-                                    )}
+                                    {show && !fullscreenApps.includes(show) && <image
+                                        preserveAspectRatio="none"
+                                        className="monitorimg"
+                                        // href={'dorta.gif'}
+                                        href={works.find(w => w.id === show).file}
+                                    />
+                                    }
 
                                     <path className="cls-9"
                                           d="M312.85,327.75a5,5,0,0,1-2.27,4.2l-14.47,8.34a1.56,1.56,0,0,1-2.55-1.4c6.33-.78,14.65-5.52,17.15-9.94,2-3.54,1-20.29-1.5-18.89l.12-.07a1.59,1.59,0,0,1,2.58,1.39Z"/>
@@ -240,6 +299,8 @@ class Main extends React.Component {
                                     <path className="cls-17"
                                           d="M282.91,355.43c0,.2-.1.31-.24.31a.37.37,0,0,1-.2-.06l-19.41-11.2a1,1,0,0,1-.44-.76c0-.2.1-.31.24-.31a.37.37,0,0,1,.2.06l19.41,11.21A1,1,0,0,1,282.91,355.43Z"/>
                                 </g>
+
+
                                 <g ref="mouse">
                                     <polygon className="cls-3"
                                              points="311.35 358.25 322.08 364.45 329.24 360.32 318.5 354.12 311.35 358.25"/>
@@ -563,7 +624,7 @@ class Main extends React.Component {
             } else {
                 return (
                     <img className={fullscreenApps.includes(show) ? "fullscreen" : "hide"}
-                     src={work.file}/>
+                         src={work.file}/>
                 );
             }
         }
