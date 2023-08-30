@@ -1,12 +1,3 @@
-// class Corgi extends React.Component {
-//     render() {
-//         const { url } = this.props;
-//         return (
-//
-//         )
-//     }
-// }
-
 const works = [
     {
         id: "afia",
@@ -14,7 +5,9 @@ const works = [
         url: "https://github.com/kentywang/Afia",
         file: "afia.mp4",
         isVideo: true,
-        isFullscreen: true
+        isFullscreen: true,
+        monitorText: null,
+        desc: "1st place entry for 2017 #DecentralizeTheWeb challenge",
     },
     {
         id: "aga",
@@ -22,7 +15,9 @@ const works = [
         url: "http://vmnckpwxor.us17.qoddiapp.com",
         file: "agamari.mp4",
         isVideo: true,
-        isFullscreen: true
+        isFullscreen: true,
+        monitorText: null,
+        desc: "planetary multiplayer game built with Three.js, Cannon.js, & Socket.IO",
     },
     {
         id: "dorta",
@@ -30,7 +25,9 @@ const works = [
         url: "https://github.com/kentywang/Dorta",
         file: "dorta.gif",
         isVideo: false,
-        isFullscreen: true
+        isFullscreen: true,
+        monitorText: null,
+        desc: "hackathon fighting game built with HTML5 canvas & Socket.IO",
     },
     {
         id: "flywheel",
@@ -38,7 +35,9 @@ const works = [
         url: "https://github.com/kentywang/Flywheel",
         file: "fly.gif",
         isVideo: false,
-        isFullscreen: false
+        isFullscreen: false,
+        monitorText: null,
+        desc: "scrub through browser tabs like songs on an iPod",
     },
     {
         id: "origami",
@@ -46,7 +45,9 @@ const works = [
         url: "https://github.com/kentywang/Origami",
         file: "origami.gif",
         isVideo: false,
-        isFullscreen: false
+        isFullscreen: false,
+        monitorText: null,
+        desc: "two-fingered window resizing like pinch to zoom, built with Swift",
     },
     {
         id: "qz",
@@ -54,15 +55,18 @@ const works = [
         url: "https://quirkycorgi.codeberg.page/qz-store/",
         file: "qz.jpg",
         isVideo: false,
-        isFullscreen: false
+        isFullscreen: false,
+        monitorText: null,
+        desc: "legacy storefront for a physical book from a digital news publication",
     },
     {
         id: "scheme",
         name: "SCHEME--",
         url: "https://github.com/kentywang/scheme--",
-        file: "qz.jpg",
         isVideo: false,
-        isFullscreen: false
+        isFullscreen: false,
+        monitorText: "λ 》_",
+        desc: "(cons (+ lisp c) garbage-collector)",
     },
     {
         id: "wishlights",
@@ -70,23 +74,21 @@ const works = [
         url: "https://github.com/kentywang/Wishlights",
         file: "lanterns.gif",
         isVideo: false,
-        isFullscreen: true
+        isFullscreen: true,
+        monitorText: null,
+        desc: "virtual lantern festival built with A-Frame"
     },
+    {
+        id: "love",
+        file: "corgi-diagram.gif",
+        isVideo: false,
+        isFullscreen: true,
+        monitorText: null,
+        desc: "SVG art designed in Adobe Illustrator, animated with GSAP",
+    }
 ];
 
-const showAndTell = {
-    afia: "1st place entry for 2017 #DecentralizeTheWeb challenge",
-    aga: "planetary multiplayer game built with Three.js, Cannon.js, & Socket.IO",
-    dorta: "hackathon fighting game built with HTML5 canvas & Socket.IO",
-    love: "SVG art designed in Adobe Illustrator, animated with GSAP",
-    flywheel: "scrub through browser tabs like songs on an iPod",
-    origami: "two-fingered window resizing like pinch to zoom, built with Swift",
-    qz: "legacy storefront for a physical book from a digital news publication",
-    scheme: "(cons (+ lisp c) garbage-collector)",
-    wishlights: "virtual lantern festival built with A-Frame"
-};
-
-const fullscreenApps = works.filter(w => w.isFullscreen).map(w => w.id).concat(["love"]);
+const fullscreenApps = works.filter(w => w.isFullscreen).map(w => w.id);
 
 class Main extends React.Component {
     constructor(props) {
@@ -106,7 +108,7 @@ class Main extends React.Component {
     showDiagram = (id) => {
         this.setState({
             show: id,
-            showAbout: <div style={{fontWeight: "600", color: "white"}}>{showAndTell[id]}</div>
+            showAbout: <div style={{fontWeight: "600", color: "white"}}>{works.find(w => w.id === id).desc}</div>
         });
     }
 
@@ -275,15 +277,16 @@ class Main extends React.Component {
                                              points="296.8 348.29 296.96 352.06 293.56 353.98 293.39 350.21 296.8 348.29"/>
 
                                     <text className="cls-18"
-                                          transform="matrix(0.84, -0.54, 0.04, 1, 296.82, 330.09)">woof.
+                                          transform="matrix(0.84, -0.54, 0.04, 1, 296.82, 330.09)">{works.find(w => w.id === show) ? works.find(w => w.id === show).monitorText : "woof."}
                                     </text>
 
-                                    {show && !fullscreenApps.includes(show) && <image
-                                        preserveAspectRatio="none"
-                                        className="monitorimg"
-                                        // href={'dorta.gif'}
-                                        href={works.find(w => w.id === show).file}
-                                    />
+                                    {show && !fullscreenApps.includes(show) &&
+                                        <image
+                                            preserveAspectRatio="none"
+                                            className="monitorimg"
+                                            // href={'dorta.gif'}
+                                            href={works.find(w => w.id === show).file}
+                                        />
                                     }
 
                                     <path className="cls-9"
@@ -579,8 +582,8 @@ class Main extends React.Component {
                         </svg>
                     </div>
                     <div ref="works" id="works" className="col-md-6 text-center">
-                        {show !== "love" &&
-                            works.map(({id, name, url}) => (
+                        {
+                            works.filter(w => w.id !== "love").map(({id, name, url}) => (
                                 <div key={id}
                                      className={(showAbout && show !== id) ? "invisible" : "visible"}
                                 >
