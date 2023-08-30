@@ -17,7 +17,7 @@ const works = [
         isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "planetary multiplayer game built with Three.js, Cannon.js, & Socket.IO",
+        desc: "adversarial multiplayer Katamari on a planetary scale, built with Three.js & Cannon.js",
     },
     {
         id: "dorta",
@@ -104,7 +104,7 @@ class Main extends React.Component {
 
     setPlayBack = () => {
         if (this.state.show === "afia")
-            this.videoRef.current.playbackRate = 2.0;
+            this.videoRef.current.playbackRate = 2.5;
         else
             this.videoRef.current.playbackRate = 1.0;
     }
