@@ -57,7 +57,7 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: null,
-        desc: "legacy storefront for a physical book from a digital news publication",
+        desc: "legacy storefront for a physical book from a digital news outlet",
     },
     {
         id: "scheme",
