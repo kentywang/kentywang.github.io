@@ -15,7 +15,7 @@ const showAndTell = {
     love: "SVG art designed in Adobe Illustrator, animated with GSAP",
     flywheel: "scrub through browser tabs like songs on an iPod",
     origami: "two-fingered window resizing like pinch to zoom, built with Swift",
-    scheme: "lisp interpreter with garbage collection, built with C",
+    scheme: "(cons (+ lisp c) garbage-collector)",
     wishlights: "virtual lantern festival built with A-Frame"
 };
 
