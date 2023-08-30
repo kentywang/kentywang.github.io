@@ -148,12 +148,12 @@ class Main extends React.Component {
                 toasterTl
                     .to(codea, .8, {y: "-=22", ease: Elastic.easeOut}, "+=.4")
                     .to(codeb, .8, {y: "-=22", ease: Elastic.easeOut}, "-=.8")
-                    .to(toasterSwitch, .4, {y: "-=24", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
+                    .to(toasterSwitch, .4, {y: "-=20", ease: Elastic.easeOut.config(1, .8)}, "-=.8")
             } else {
                 toasterTl
                     .to(codea, .6, {y: "+=22"}, "+=.4")
                     .to(codeb, .6, {y: "+=22"}, "-=.6")
-                    .to(toasterSwitch, .6, {y: "+=24"}, "-=.6")
+                    .to(toasterSwitch, .6, {y: "+=20"}, "-=.6")
             }
         }
     }
