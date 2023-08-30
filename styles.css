@@ -6,12 +6,20 @@ body, html {
 }
 
 a, a:visited, a:hover {
-    color: #fff;
+    color: #778899;
     text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #fff;
+}
+
+#name {
+
+}
+
+#corgi {
+
 }
 
 #about {
@@ -24,8 +32,6 @@ a:hover {
 }
 
 #love {
-    display: none;
-    opacity: 0;
     font-size: 3em;
 }
 
@@ -37,19 +43,66 @@ a:hover {
     color: #778899;
 }
 
-.links {
+#works {
+    z-index: 10;
     font-size: 3em;
+    font-weight: 600;
 }
 
-.fa-github {
+.hide {
+    display: none;
+}
+
+.fullscreen-love {
+    display: inline;
     position: fixed;
-    margin: 15px 15px;
-    color: #778899;
-    bottom: 0;
-    left: 0;
+    opacity: .5;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    transform: translate(-50%, -50%);
 }
 
-.fa-github:hover {
-    color: #fff;
+.invisible {
+    opacity: 0;
 }
 
+.visible {
+    opacity: 1;
+}
+
+.fullscreen {
+    display: inline;
+    position: fixed;
+    opacity: .7;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+svg polygon {
+    fill: none;
+    stroke: #09d;
+    stroke-width: 3;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash 5s linear forwards;
+    animation: dash 5s linear forwards;
+}
+
+@-webkit-keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

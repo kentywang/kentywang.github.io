@@ -18,52 +18,41 @@ class Main extends React.Component {
         // select this entire node
 
         const name = ReactDOM.findDOMNode(this.refs.name);
-        const links = ReactDOM.findDOMNode(this.refs.links);
         const works = ReactDOM.findDOMNode(this.refs.works);
         const love = ReactDOM.findDOMNode(this.refs.love);
 
         // animate name, title, and any other bits once component mounts
-        TweenMax.from(name, .7, {y: "-=50", opacity: 0, ease: Power1.easeOut, delay: .7});
-        TweenMax.from(works, .7, {y: "-=50", opacity: 0, ease: Power1.easeOut, delay: 1.2});
-
-        new TimelineMax()
-            // links
-            .to(links, 0, {scale: 1, ease: Linear.noEase}, "-=0")
-            .to(links, 1, {opacity: 1, ease: Linear.noEase}, "-=0")
-
-            // heart appears in lower right corner of window
-            .to(love, .5, {
-                opacity: 1,
-                display: 'block',
-                ease: Power4.easeOut
-            }, "-=.5")
-
-
+        // TweenMax.from(name, .7, {y: "-=50", opacity: 0, ease: Power1.easeOut, delay: .7});
+        // TweenMax.from(works, .7, {y: "-=50", opacity: 0, ease: Power1.easeOut, delay: 1.2});
     }
 
     showDiagram = (pic) => {
+
         switch (pic) {
             case "love":
-                this.setState({show: "love"});
-                this.setState({showAbout: <div>SVG art designed in Adobe Illustrator, animated with GSAP</div>});
+                this.setState({
+                    show: "love",
+                    showAbout: <div style={{fontWeight: "600", color: "white"}}>SVG art designed in Adobe Illustrator,
+                        animated with GSAP</div>
+                });
                 break;
             case "dorta":
-                this.setState({show: "dorta"});
                 this.setState({
+                    show: "dorta",
                     showAbout: <div style={{fontWeight: "600", color: "white"}}>hackathon fighting game built with HTML5
                         canvas & Socket.IO</div>
                 });
                 break;
             case "aga":
-                this.setState({show: "aga"});
                 this.setState({
+                    show: "aga",
                     showAbout: <div style={{fontWeight: "600", color: "white"}}>planetary multiplayer game built with
                         React, Redux, Three.js, Cannon.js, & Socket.IO</div>
                 });
                 break;
             case "afia":
-                this.setState({show: "afia"});
                 this.setState({
+                    show: "afia",
                     showAbout: <div style={{fontWeight: "600", color: "white"}}>UX prototype for a decentralized,
                         personal health record app. 1st place entry for 2017 #DecentralizeTheWeb challenge</div>
                 });
@@ -72,8 +61,10 @@ class Main extends React.Component {
     }
 
     hideDiagram = () => {
-        this.setState({show: ""});
-        this.setState({showAbout: false})
+        this.setState({
+            show: "",
+            showAbout: false
+        });
     }
 
     animate = () => {
@@ -172,90 +163,67 @@ class Main extends React.Component {
     }
 
     render() {
-        return (
-            <div className="container-fluid">
-                {this.images()}
+        const {show, showAbout} = this.state;
 
-                <div ref="name" id="name">
-                    <object style={this.state.show ? {opacity: 0} : {opacity: 1}} ref="svg"
+        const works = [
+            {id: "afia", name: "Afia", url: "https://github.com/kentywang/Afia"},
+            {id: "aga", name: "Agamari", url: "http://vmnckpwxor.us17.qoddiapp.com"},
+            {id: "dorta", name: "Dorta", url: "https://github.com/kentywang/Dorta"},
+            {id: "flywheel", name: "Flywheel", url: "https://github.com/kentywang/Flywheel"},
+            {id: "origami", name: "Origami", url: "https://github.com/kentywang/Origami"},
+            {id: "scheme", name: "SCHEME--", url: "https://github.com/kentywang/scheme--"},
+            {id: "wishlights", name: "Wishlights", url: "https://github.com/kentywang/Wishlights"},
+        ]
+
+        return (
+            <div className="container">
+                {this.images(show)}
+
+                <div ref="name" id="name" className="container-sm">
+                    <object style={{maxHeight: "20vh"}} className={show ? "invisible" : "visible"} ref="svg"
                             data="siggy.svg" type="image/svg+xml" width={"100%"}/>
                 </div>
 
-                <object style={this.state.show ? {opacity: 0} : {opacity: 1}} ref="svg"
-                        data="/corgi-art.svg" type="image/svg+xml" width={"100%"}/>
-
-                <div ref="works" id="works" className="text-center">
-                    <div onMouseOver={() => this.showDiagram("aga")} onMouseLeave={this.hideDiagram}>
-                        <a href="https://agamari.herokuapp.com" target="_blank">Agamari</a>
+                <div className="row">
+                    <div id="corgi" className="col-md-6">
+                        <object className={show ? "invisible" : "visible"} ref="svg"
+                                data="corgi-art.svg" type="image/svg+xml" width={"100%"}/>
                     </div>
-                    <div onMouseOver={() => this.showDiagram("afia")} onMouseLeave={this.hideDiagram}>
-                        <a href="https://projects.invisionapp.com/share/PXAF8L8YJ" target="_blank">Afia</a>
-                    </div>
-                    <div onMouseOver={() => this.showDiagram("dorta")} onMouseLeave={this.hideDiagram}>
-                        <a href="https://dorta.herokuapp.com" target="_blank">Dorta</a>
-                    </div>
+                    <div ref="works" id="works" className="col-md-6 text-center">
+                        {show !== "love" &&
+                            works.map(({id, name, url}) => (
+                                <div key={id}
+                                     onMouseOver={() => this.showDiagram(id)}
+                                     onMouseLeave={this.hideDiagram}
+                                     className={(showAbout && show !== id) ? "invisible" : "visible"}
+                                >
+                                    <a href={url} target="_blank">
+                                        {name}
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    < /div>
                 </div>
 
-                <div ref="links" className="links">
-                    <a href="https://github.com/kentywang/" target="_blank">
-                        <i className="fa fa-github"></i>
-                    </a>
-                </div>
                 <div ref="love" id="love" onMouseOver={() => this.showDiagram("love")}
                      onMouseLeave={this.hideDiagram}>
-                    {this.state.showAbout && <span id="about">{this.state.showAbout}</span>}
+                    {showAbout && <span id="about">{showAbout}</span>}
                     <i className="fa fa-heart"
-                       style={this.state.show === "aga" || this.state.show === "dorta" ? {color: "white"} : {}}></i>
+                       style={show || showAbout ? {color: "white"} : {}}></i>
                 </div>
 
             </div>
         )
     }
 
-    images = () => (
+    images = (show) => (
         <React.Fragment>
-            <img style={this.state.show === "love" ? {
-                margin: "25% 16%",
-                maxWidth: "70%",
-                maxHeight: "70%"
-            } : {display: "none"}} src="corgi-diagram.png"/>
-            <img style={this.state.show === "dorta" ? {
-                display: "inline",
-                position: "fixed",
-                opacity: .65,
-                top: "50%",
-                left: "50%",
-                minWidth: "100%",
-                minHeight: "100%",
-                width: "auto",
-                height: "auto",
-                transform: "translate(-50%, -50%)"
-            } : {display: "none"}} src="dorta.gif"/>
-            <video style={this.state.show === "aga" ? {
-                display: "inline",
-                position: "fixed",
-                opacity: .9,
-                top: "50%",
-                left: "50%",
-                minWidth: "100%",
-                minHeight: "100%",
-                width: "auto",
-                height: "auto",
-                transform: "translate(-50%, -50%)"
-            } : {display: "none"}} playsInline autoPlay muted loop src="agamari.mp4"
+            <img className={show === "love" ? "fullscreen-love" : "hide"} src="corgi-diagram.png"/>
+            <img className={show === "dorta" ? "fullscreen" : "hide"} src="dorta.gif"/>
+            <video className={show === "aga" ? "fullscreen" : "hide"} playsInline autoPlay muted loop src="agamari.mp4"
                    type="video/mp4"/>
-            <video style={this.state.show === "afia" ? {
-                display: "inline",
-                position: "fixed",
-                opacity: .9,
-                top: "50%",
-                left: "50%",
-                minWidth: "100%",
-                minHeight: "100%",
-                width: "auto",
-                height: "auto",
-                transform: "translate(-50%, -50%)"
-            } : {display: "none"}} playsInline autoPlay muted loop src="afia.mp4"
+            <video className={show === "afia" ? "fullscreen" : "hide"} playsInline autoPlay muted loop src="afia.mp4"
                    type="video/mp4"/>
         </React.Fragment>
     )
