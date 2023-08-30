@@ -14,8 +14,8 @@ const showAndTell = {
     dorta: "hackathon fighting game built with HTML5 canvas & Socket.IO",
     love: "SVG art designed in Adobe Illustrator, animated with GSAP",
     flywheel: "scrub through browser tabs like songs on an iPod",
-    origami: "two-fingered window resizing like pinch to zoom",
-    scheme: "lisp interpreter with garbage collection built with C",
+    origami: "two-fingered window resizing like pinch to zoom, built with Swift",
+    scheme: "lisp interpreter with garbage collection, built with C",
     wishlights: "virtual lantern festival built with A-Frame"
 };
 
@@ -223,3 +223,15 @@ ReactDOM.render(<Main/>,
 
 let toasterhasPopped = true;
 
+console.log(`
+                                              88
+                                              ""
+
+ ,adPPYba,  ,adPPYba,  8b,dPPYba,  ,adPPYb,d8 88
+a8"     "" a8"     "8a 88P'   "Y8 a8"    \`Y88 88
+8b         8b       d8 88         8b       88 88
+"8a,   ,aa "8a,   ,a8" 88         "8a,   ,d88 88
+ \`"Ybbd8"'  \`"YbbdP"'  88          \`"YbbdP"Y8 88
+                                   aa,    ,88
+                                    "Y8bbdP"
+`);

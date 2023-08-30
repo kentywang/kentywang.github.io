@@ -12,6 +12,16 @@ a, a:visited, a:hover {
 
 a:hover {
     color: #fff;
+    transition: fill .2s;
+}
+
+a:not(:hover) {
+    color: #778899;
+    transition: fill .2s;
+}
+
+#name path {
+    fill: white;
 }
 
 #name {
@@ -84,26 +94,4 @@ a:hover {
     width: auto;
     height: auto;
     transform: translate(-50%, -50%);
-}
-
-svg polygon {
-    fill: none;
-    stroke: #09d;
-    stroke-width: 3;
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    -webkit-animation: dash 5s linear forwards;
-    animation: dash 5s linear forwards;
-}
-
-@-webkit-keyframes dash {
-    to {
-        stroke-dashoffset: 0;
-    }
-}
-
-@keyframes dash {
-    to {
-        stroke-dashoffset: 0;
-    }
 }
