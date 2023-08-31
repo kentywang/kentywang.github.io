@@ -75,7 +75,7 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
-        desc: "(cons (+ lisp c) garbage-collector)",  // TODO: Mention WASM when implemented
+        desc: "(cons (+ lisp c wasm) garbage-collector)"
     },
     {
         id: "wishlights",
