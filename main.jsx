@@ -71,7 +71,7 @@ const works = [
     {
         id: "scheme",
         name: "SCHEME--",
-        url: "https://kentywang.github.io/scheme--",
+        url: "http://tpkvafwsgu.us16.qoddiapp.com",
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
