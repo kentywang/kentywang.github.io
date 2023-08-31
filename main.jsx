@@ -22,7 +22,7 @@ const works = [
     {
         id: "dorta",
         name: "Dorta",
-        url: "https://github.com/kentywang/Dorta",
+        url: "https://kentywang.github.io/Dorta",
         file: "dorta.gif",
         isVideo: false,
         isFullscreen: true,
@@ -71,7 +71,7 @@ const works = [
     {
         id: "wishlights",
         name: "Wishlights",
-        url: "https://github.com/kentywang/Wishlights",
+        url: "https://kentywang.github.io/Wishlights",
         file: "lanterns.gif",
         isVideo: false,
         isFullscreen: true,
