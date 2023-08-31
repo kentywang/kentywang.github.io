@@ -12,7 +12,7 @@ const works = [
     {
         id: "aga",
         name: "Agamari",
-        url: "http://vmnckpwxor.us17.qoddiapp.com",
+        url: "https://vmnckpwxor.us17.qoddiapp.com",
         file: "agamari.mp4",
         isVideo: true,
         isFullscreen: true,
@@ -71,7 +71,7 @@ const works = [
     {
         id: "scheme",
         name: "SCHEME--",
-        url: "https://dynamic-lollipop-ee41e8.netlify.app",
+        url: "https://scheme-minus-minus.netlify.app",
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
