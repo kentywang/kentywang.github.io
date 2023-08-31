@@ -76,7 +76,7 @@ const works = [
         isVideo: false,
         isFullscreen: true,
         monitorText: null,
-        desc: "virtual lantern festival built with A-Frame"
+        desc: "VR lantern festival over water built with A-Frame"
     },
     {
         id: "love",
