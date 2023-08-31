@@ -50,6 +50,15 @@ const works = [
         desc: "two-fingered window resizing like pinch to zoom, built with Swift",
     },
     {
+        id: "peas",
+        name: "Peas Dividend",
+        url: "https://kentywang.github.io/peas-dividend",
+        isVideo: false,
+        isFullscreen: false,
+        monitorText: "🔬🧬",
+        desc: "interactive Punnett square illustrating Mendelian inheritance",
+    },
+    {
         id: "qz",
         name: "Quartz shop",
         url: "https://quirkycorgi.codeberg.page/qz-store/",
@@ -607,9 +616,9 @@ class Main extends React.Component {
                     < /div>
                 </div>
 
-                <div ref="love" id="love" onMouseOver={() => this.showDiagram("love")}
+                <div id="love" onMouseOver={() => this.showDiagram("love")}
                      onMouseLeave={this.hideDiagram}>
-                    {showAbout && <span id="about">{showAbout}</span>}
+                    <span id="about">{showAbout}</span>
                     <i className="fa fa-heart"
                        style={show || showAbout ? {color: "white"} : {}}></i>
                 </div>

@@ -22,12 +22,13 @@ a:not(:hover) {
 }
 
 #about {
-    font-size: .8em;
+    font-size: 48px;
     position: fixed;
     margin: 15px 15px;
     bottom: 0;
-    right: 3em;
+    left: 0;
     color: #778899;
+    max-width: 500px;
 }
 
 #love {
