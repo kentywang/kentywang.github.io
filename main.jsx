@@ -71,7 +71,7 @@ const works = [
     {
         id: "scheme",
         name: "SCHEME--",
-        url: "https://kentywang.github.io/scheme--",
+        url: "https://dynamic-lollipop-ee41e8.netlify.app",
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
