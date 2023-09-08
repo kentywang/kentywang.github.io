@@ -613,8 +613,8 @@ class Main extends React.Component {
                     <span id="about">{showAbout}</span>
                     <i className="fa fa-heart"
                        style={show || showAbout ? {color: "white"} : {}}></i>
+                    <img className={show === "afia" ? "visible tweet" : "invisible tweet"} src={"afia-tweet.png"} />
                 </div>
-
             </div>
         )
     }
