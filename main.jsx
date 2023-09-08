@@ -7,7 +7,7 @@ const works = [
         isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "personal health records resolved via decentralized DNS",
+        desc: "encrypted personal health records resolved via decentralized DNS",
     },
     {
         id: "aga",
