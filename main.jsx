@@ -7,7 +7,7 @@ const works = [
         isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "2017 #DecentralizeTheWeb challenge’s 1st place entry",
+        desc: "personal health records resolved via decentralized DNS",
     },
     {
         id: "aga",
@@ -17,7 +17,7 @@ const works = [
         isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "adversarial multiplayer Katamari on a planetary scale, built with Three.js & Cannon.js",
+        desc: "adversarial multiplayer Katamari on a planetary scale",
     },
     {
         id: "dorta",
@@ -56,7 +56,7 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: "🔬🧬",
-        desc: "interactive Punnett square illustrating Mendelian inheritance",
+        desc: "interactive Punnett square built with Vue",
     },
     {
         id: "qz",
@@ -66,7 +66,7 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: null,
-        desc: "legacy storefront for a physical book from a digital news outlet",
+        desc: "(archived) storefront for a book from a digital news outlet",
     },
     {
         id: "scheme",
@@ -75,21 +75,21 @@ const works = [
         isVideo: false,
         isFullscreen: false,
         monitorText: "λ 》_",
-        desc: "(cons (+ lisp c wasm) garbage-collector)"
+        desc: "(cons (+ lisp (wasm c)) garbage-collector)"
     },
     {
         id: "wishlights",
         name: "Wishlights",
         url: "https://kentywang.github.io/Wishlights",
-        file: "lanterns.gif",
-        isVideo: false,
+        file: "wish.mp4",
+        isVideo: true,
         isFullscreen: true,
         monitorText: null,
-        desc: "VR lantern festival over water built with A-Frame"
+        desc: "VR lantern festival over water, built with A-Frame"
     },
     {
         id: "love",
-        file: "corgi-diagram.gif",
+        file: "corgi-diagram.png",
         isVideo: false,
         isFullscreen: true,
         monitorText: null,
@@ -108,14 +108,6 @@ class Main extends React.Component {
             showAbout: false,
             toasterHasPopped: true,
         }
-        this.videoRef = React.createRef();
-    }
-
-    setPlayBack = () => {
-        if (this.state.show === "afia")
-            this.videoRef.current.playbackRate = 2.5;
-        else
-            this.videoRef.current.playbackRate = 1.0;
     }
 
     componentDidMount() {
@@ -628,28 +620,26 @@ class Main extends React.Component {
     }
 
     images = (show) => {
-        if (show === "love") {
-            return <img className="fullscreen-love" src="corgi-diagram.png"/>;
-        }
-        const work = works.find(w => w.id === show);
-        if (work) {
-            if (work.isVideo) {
-                return (
-                    <video className={fullscreenApps.includes(show) ? "fullscreen" : "hide"}
-                           src={work.file}
-                           ref={this.videoRef}
-                           playsInline autoPlay muted loop
-                           onCanPlay={() => this.setPlayBack()}
-                           type="video/mp4"
-                    />
-                );
-            } else {
-                return (
-                    <img className={fullscreenApps.includes(show) ? "fullscreen" : "hide"}
-                         src={work.file}/>
-                );
-            }
-        }
+        const videos = works.filter(w => w.isVideo).map((w) => (
+            <video key={w.id}
+                   className={show === w.id ? "fullscreen" : "hide"}
+                   src={w.file}
+                   playsInline autoPlay muted loop
+                   type="video/mp4"
+            />
+        ));
+        const fullscreenImgs = works.filter(w => !w.isVideo && w.isFullscreen).map((w) => (
+            <img key={w.id}
+                 className={show === w.id ? (show === "love" ? "fullscreen-love" : "fullscreen") : "hide"}
+                 src={w.file} alt={w.desc}/>
+        ));
+        return (
+            <>
+                {videos}
+                {fullscreenImgs}
+            </>
+        );
+
     };
 }
 
