@@ -612,7 +612,7 @@ class Main extends React.Component {
                      onMouseLeave={this.hideDiagram}>
                     <span id="about">{showAbout}</span>
                     <i className="fa fa-heart"
-                       style={show || showAbout ? {color: "white"} : {}}></i>
+                       style={show || showAbout ? {color: "white", textShadow: "0 2px 6px #15191f"} : {}}></i>
                     <img className={show === "afia" ? "visible tweet" : "invisible tweet"} src={"afia-tweet.png"} />
                 </div>
             </div>

@@ -58,7 +58,7 @@ a:not(:hover) {
 .fullscreen-love {
     display: inline;
     position: fixed;
-    opacity: .5;
+    opacity: .6;
     top: 50%;
     left: 50%;
     width: auto;
@@ -78,7 +78,7 @@ a:not(:hover) {
 .fullscreen {
     display: inline;
     position: fixed;
-    opacity: .75;
+    opacity: .85;
     top: 50%;
     left: 50%;
     min-width: 100%;
