@@ -91,11 +91,10 @@ a:not(:hover) {
 .tweet {
     display: none;
     position: fixed;
-    margin: 50px 20px;
-    bottom: 0;
-    right: 0;
-    width: 25vw;
-    filter: drop-shadow(10px 10px 9px #15191f);
+    top: 0;
+    left: 0;
+    width: 476px;
+    filter: drop-shadow(1px 1px 12px black);
 }
 
 @media (min-width: 1200px) {
